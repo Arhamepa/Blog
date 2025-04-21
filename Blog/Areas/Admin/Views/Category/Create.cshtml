@@ -1,0 +1,37 @@
+﻿@model Blog.Areas.Admin.Models.Categories.CreateCategoryViewModel;
+@{
+    ViewData["Title"] = "افزودن دسته بندی جدید";
+}
+<section class="content-header">
+    <h1>@ViewData["Title"]</h1>
+    <ol class="breadcrumb">
+        <li><a asp-area="Admin" asp-controller="Home" asp-action="Index"><i class="fa fa-dashboard"></i> خانه</a></li>
+        <li><a asp-area="Admin" asp-controller="Category" asp-action="Index">دسته بندی ها</a></li>
+        <li class="active">@ViewData["Title"]</li>
+    </ol>
+</section>
+
+<section class="content">
+    <form class="box box-danger" method="post" asp-area="Admin" asp-controller="Category" asp-action="Create">
+        <div class="box-body row">
+            <input type="hidden" asp-for="ParentId"/>
+            <div class="col-md-6">
+                @Html.EditorFor(m => m.Title)
+            </div>
+            <div class="col-md-6">
+                @Html.EditorFor(m => m.Slug)
+            </div>
+            <div class="col-md-6">
+                @Html.EditorFor(m => m.MetaTag)
+            </div>
+            <div class="col-md-6">
+                @Html.EditorFor(m => m.MetaDescription)
+            </div>
+            <div class="box-footer">
+                <button type="submit" class="btn btn-success">ثبت اطلاعات</button>
+                <button class="btn btn-warning" asp-area="Admin" asp-controller="Category" asp-action="Index">انصراف</button>
+            </div>
+        </div>
+    </form>
+</section>
+

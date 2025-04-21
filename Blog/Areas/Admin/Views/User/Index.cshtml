@@ -1,0 +1,69 @@
+﻿@model Blog_CoreLayer.DTOs.User.UserFilterDto
+@using Blog_CoreLayer.Utilities;
+@{
+    var counter = 1;
+    ViewData["Title"] = "کاربران";
+    ViewData["selected"] = "user";
+}
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>@ViewData["Title"]</h1>
+    <ol class="breadcrumb">
+        <li><a asp-area="Admin" asp-controller="Post" asp-action="Index"><i class="fa fa-dashboard"></i> خانه</a></li>
+        <li class="active">@ViewData["Title"]</li>
+    </ol>
+</section>
+
+<section class="content">
+    @*<div class="box box-danger">
+        <div class="box-body">
+            <form>
+                <div class="box-header">
+                    <button type="submit" class="btn btn-info pull-left">فیلتر</button>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 form-group">
+                        <input class="form-control" value="@Model.FilterParams.Title" type="text" name="title" placeholder="عنوان"/>
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <input class="form-control" value="@Model.FilterParams.CategorySlug" type="text" name="categorySlug" placeholder="Slug Category"/>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>*@
+    <a class="btn btn-success my-5" asp-area="Admin" asp-controller="User" asp-action=""> افزودن گروه جدید</a>
+    <div class="box box-primary">
+        <div class="box box-body">
+            <table class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>نام و نام خانوادگی</th>
+                    <th>نام کاربری</th>
+                    <th>نقش</th>
+                   <th>عملیات</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var item in Model.Users)
+                {
+                    <tr>
+                        <td>@counter</td>
+                        <td>@item.FullName</td>
+                        <td>@item.UserName</td>
+                        <td>@item.Role.ToString()</td>
+                        <td>
+                            <a class="btn btn-primary" onclick="OpenModal(`/admin/user/showEditModal?userId=${@item.UserId}`,'default_Modal','ویرایش کاربر')">ویرایش</a>
+                        </td>
+                    </tr>
+                    counter += 1;
+                }
+                </tbody>
+            </table>
+        </div>
+        <partial name="_Pagination" model="Model"/>
+    </div>
+ 
+</section>

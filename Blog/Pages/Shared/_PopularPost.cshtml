@@ -1,0 +1,41 @@
+﻿@using Blog_CoreLayer.Utilities
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model List<Blog_CoreLayer.DTOs.Post.PostDto>; 
+@if (Model.Any())
+{
+   
+        <aside class="widget widget-popular-posts">
+            <h4 class="widget-title">محبوب ترین مقالات</h4>
+            <ul class="post-list-small">
+                @foreach (var post in Model)
+                {
+                    <li class="post-list-small__item">
+                        <article class="post-list-small__entry clearfix">
+                            <div class="post-list-small__img-holder">
+                                <div class="thumb-container thumb-100">
+                                    <a asp-page="Post" asp-route-slug="@post.Slug">
+                                        <img data-src="@Directories.PostImageFolder(post.ImageName)" src="/img/content/thumb/post-5.jpg" alt="@post.Title" class="post-list-small__img--rounded lazyload">
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="post-list-small__body">
+                                <h3 class="post-list-small__entry-title">
+                                    <a asp-page="Post" asp-route-slug="@post.Slug">@post.Title</a>
+                                </h3>
+                                <ul class="entry__meta">
+                                    <li class="entry__meta-author">
+                                        <span>نویسنده:</span>
+                                        <a href="#">@post.UserFullName</a>
+                                    </li>
+                                    <li class="entry__meta-date">
+                                        @post.CreateDate.ToShortDateString()
+                                    </li>
+                                </ul>
+                            </div>
+                        </article>
+                    </li>
+                }
+            </ul>
+        </aside> 
+   
+}
